@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1003518765466",
+    "project_id": "loginfirebase-aabf3",
+    "storage_bucket": "loginfirebase-aabf3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003518765466:android:15402db8f472a30d5e3223",
+        "android_client_info": {
+          "package_name": "com.example.login_firebasep"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8eOcJnzBxNilvnncdKpdoEA28_8wyoiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
