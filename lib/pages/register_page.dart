@@ -18,25 +18,72 @@ class _RegisterPageState extends State<RegisterPage> {
   final registerConfirmPasswordController = TextEditingController();
 
   void registerUser() async {
-    try {
-      if (registerPasswordController.text == registerConfirmPasswordController.text) {
+    if (registerPasswordController.text !=
+        registerConfirmPasswordController.text) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Password didn't match, plz try again"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("OK"),
+            ),
+          ],
+        ),
+      );
+    } else if (registerPasswordController.text ==
+        registerConfirmPasswordController.text) {
+      try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: registerMailController.text,
           password: registerConfirmPasswordController.text,
         );
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
+        showSucessMessage();
+      } on FirebaseAuthException catch (e) {
+        // Navigator.pop(context);
+        userAlreadyExists();
+        print('inside catch block');
       }
-    } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
-      showErrorMessage();
+      print("button tapped");
     }
-    print("button tapped");
   }
 
-  void showErrorMessage() {}
+  void userAlreadyExists() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("User already exits"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            ),
+            child: Text("SignIn"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showSucessMessage() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("User created sucessfuly!!!"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            ),
+            child: Text("Nice"),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
